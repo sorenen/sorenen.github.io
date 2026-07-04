@@ -233,16 +233,19 @@ button:focus-visible {
 /* Secondary links */
 .links {
   display: flex;
+  flex-wrap: nowrap;
   gap: clamp(0.9rem, 2vw, 1.6rem);
-  flex-wrap: wrap;
   justify-content: center;
+  width: 100%;
+  max-width: 58rem;
 }
 .links a {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1.1rem;
-  min-width: 15rem;
+  flex: 1 1 0;
+  min-width: 0;
   color: var(--ink);
   text-decoration: none;
   padding: 1.1em 1.6em;
@@ -402,6 +405,14 @@ footer {
   }
   .artist span { width: auto; }
   .artist .soren { color: var(--ink); } /* bottom half is light on mobile */
+
+  .links {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 22rem;
+    margin: 0 auto;
+  }
+  .links a { min-width: 0; }
 }
 </style>
 </head>
