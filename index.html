@@ -1,483 +1,181 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Dreams of Darkness, Dreams of Light — Soren En</title>
-<meta name="description" content="Dreams of Darkness, Dreams of Light — the album by Soren En. Listen on YouTube, Spotify, and Apple Music, or subscribe to get the release first.">
-
-<!-- OG: cover image (path relative to https://www.sorenen.com/) -->
-<meta property="og:type" content="music.album">
-<meta property="og:title" content="Dreams of Darkness, Dreams of Light — Soren En">
-<meta property="og:description" content="The album by Soren En. Listen on YouTube, Spotify, and Apple Music, or subscribe to get the release first.">
-<meta property="og:url" content="https://www.sorenen.com/">
-<meta property="og:image" content="https://www.sorenen.com/assets/cover.jpg">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Dreams of Darkness, Dreams of Light — Soren En">
-<meta name="twitter:description" content="The album by Soren En. Listen on YouTube, Spotify, and Apple Music, or subscribe to get the release first.">
-<meta name="twitter:image" content="https://www.sorenen.com/assets/cover.jpg">
-
-<!-- Favicon: half-moon circle, light half left / dark half right -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23f2f2f0'/%3E%3Cpath d='M50 2 a48 48 0 0 1 0 96 Z' fill='%23141412'/%3E%3C/svg%3E">
-
-<style>
-/* ============================================================
-   DREAMS OF DARKNESS, DREAMS OF LIGHT — SOREN EN
-   Monochrome one-pager. Two inks only:
-     --ink   near-black  #141412
-     --paper warm off-white #ECE9E1
-   Serif stack chosen to match the cover's classic serif caps.
-   ============================================================ */
-
-:root {
-  --ink:   #141412;
-  --paper: #f2f2f0;
-  --serif: Baskerville, "Baskerville Old Face", "Palatino Linotype",
-           Palatino, "Times New Roman", Times, serif;
-  --track-title: 0.32em;   /* letterspacing for large title caps */
-  --track-label: 0.42em;   /* letterspacing for small labels (SOREN EN style) */
-  --moon-base: 0deg;       /* cover orientation: light half left, dark half right */
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-
-body {
-  font-family: var(--serif);
-  background: var(--paper);
-  color: var(--ink);
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
-
-/* ---------- Accessibility helpers ---------- */
-
-.sr-only {
-  position: absolute; width: 1px; height: 1px;
-  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
-}
-
-.skip-link {
-  position: absolute; left: 50%; top: 0; transform: translate(-50%, -110%);
-  z-index: 100;
-  background: var(--paper); color: var(--ink);
-  border: 1px solid var(--ink);
-  padding: 0.6em 1.4em;
-  font-size: 0.8rem; letter-spacing: var(--track-label); text-transform: uppercase;
-  text-decoration: none;
-}
-.skip-link:focus-visible { transform: translate(-50%, 0); }
-
-a:focus-visible,
-button:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 4px;
-}
-
-/* ============================================================
-   1. HERO — the cover, unfolded
-   ============================================================ */
-
-.hero {
-  position: relative;
-  height: 100vh;
-  height: 100svh;
-  /* hard vertical split: black left, paper right */
-  background: linear-gradient(90deg, var(--ink) 0 50%, var(--paper) 50% 100%);
-}
-
-/* Thin white border anchoring the bottom edge of the hero,
-   visible across both halves like the cover's paper edge */
-.hero::after {
-  content: "";
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 1px;
-  background: #fff;
-  mix-blend-mode: difference;
-}
-
-.hero h1 {
-  font-weight: 400;
-  font-size: clamp(1.35rem, 3.2vw, 2.7rem);
-  line-height: 1.55;
-  letter-spacing: var(--track-title);
-  text-transform: uppercase;
-  text-align: center;
-}
-
-.title-half {
-  position: absolute;
-  top: 50%;
-  width: 50%;
-  transform: translateY(-50%);
-  display: block;
-  padding: 0 4vw;
-}
-.title-dark  { left: 0;  color: var(--paper); }
-.title-light { right: 0; color: var(--ink);   }
-
-/* Half-moon circle, centered on the seam.
-   Light half sits on the dark side; dark half on the light side. */
-.moon {
-  position: absolute;
-  left: 50%; top: 50%;
-  width: clamp(88px, 10vw, 144px);
-  aspect-ratio: 1;
-  margin: calc(clamp(88px, 10vw, 144px) / -2);
-  border-radius: 50%;
-  background: linear-gradient(90deg, var(--paper) 0 50%, var(--ink) 50% 100%);
-  transform: rotate(var(--moon-base));
-  will-change: transform;
-}
-
-/* Artist name, split across the seam like the cover */
-.artist {
-  position: absolute;
-  bottom: 9vh;
-  width: 100%;
-  display: flex;
-  font-size: clamp(1.05rem, 1.9vw, 1.6rem);
-  letter-spacing: var(--track-label);
-  text-transform: uppercase;
-}
-.artist span { width: 50%; text-align: center; position: relative; }
-.artist .soren { color: var(--paper); }
-.artist .en    { color: var(--ink);   }
-
-/* Minimal scroll cue: small downward chevron on the seam.
-   mix-blend-mode keeps it monochrome-visible on both halves. */
-.scroll-cue {
-  position: absolute;
-  left: 50%; bottom: 3vh;
-  width: 16px; height: 16px;
-  transform: translateX(-50%) rotate(45deg);
-  border-right: 2px solid #fff;
-  border-bottom: 2px solid #fff;
-  mix-blend-mode: difference;
-}
-
-/* ============================================================
-   2. ABOUT — the darkness chapter
-   ============================================================ */
-
-.about {
-  position: relative;
-  background: var(--ink);
-  color: var(--paper);
-  min-height: 90vh;
-  display: grid;
-  place-items: center;
-  padding: 20vh 6vw;
-}
-
-.about h2.section-title {
-  font-weight: 700;
-  font-size: clamp(2rem, 4vw, 3.2rem);
-  letter-spacing: var(--track-title);
-  text-transform: uppercase;
-  margin-bottom: 2.4rem;
-  text-align: center;
-}
-
-.about p {
-  max-width: 58ch;
-  text-align: center;
-  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
-  line-height: 2.1;
-  letter-spacing: 0.04em;
-}
-
-.about .scroll-cue-about {
-  position: absolute;
-  left: 50%; bottom: 3vh;
-  width: 16px; height: 16px;
-  transform: translateX(-50%) rotate(45deg);
-  border-right: 2px solid var(--paper);
-  border-bottom: 2px solid var(--paper);
-}
-
-/* ============================================================
-   3. LISTEN & FOLLOW — the light chapter
-   ============================================================ */
-
-.listen {
-  background: var(--paper);
-  color: var(--ink);
-  padding: 18vh 6vw 14vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: clamp(3rem, 7vh, 5rem);
-}
-
-/* Primary CTA — must outrank everything else here */
-.cta {
-  display: inline-block;
-  background: var(--ink);
-  color: var(--paper);
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: var(--track-label);
-  font-size: clamp(0.95rem, 1.6vw, 1.3rem);
-  padding: 1.5em 3.2em;
-  text-align: center;
-  border: 1px solid var(--ink);
-}
-.cta:hover { background: var(--paper); color: var(--ink); }
-
-/* Secondary links */
-.links {
-  display: flex;
-  gap: clamp(0.9rem, 2vw, 1.6rem);
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.links a {
-  display: inline-block;
-  color: var(--ink);
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: var(--track-label);
-  font-size: clamp(0.75rem, 1.1vw, 0.9rem);
-  padding: 1em 2.2em;
-  border: 1px solid var(--ink);
-}
-.links a:hover { background: var(--ink); color: var(--paper); }
-
-/* QR codes — desktop/tablet only; hidden on mobile (buttons are the mobile path) */
-.qr-grid {
-  display: none;
-}
-@media (min-width: 768px) {
-  .qr-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: clamp(1.5rem, 3vw, 3rem);
-    width: min(58rem, 100%);
-  }
-}
-
-.qr {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.1rem;
-}
-.qr .qr-frame {
-  width: 100%;
-  aspect-ratio: 1 / 1;           /* fixed ratio: swapping the SVG causes zero layout shift */
-  border: 1px solid var(--ink);
-  padding: 8%;
-  background: #fff;              /* QR quiet zone; still monochrome */
-}
-.qr img { display: block; width: 100%; height: 100%; }
-.qr figcaption {
-  font-size: 0.72rem;
-  letter-spacing: var(--track-label);
-  text-transform: uppercase;
-  text-indent: var(--track-label); /* optically recenters letterspaced caps */
-}
-
-/* ============================================================
-   4. FOOTER
-   ============================================================ */
-
-footer {
-  background: var(--ink);
-  color: var(--paper);
-  min-height: 22vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 3rem 6vw;
-  font-size: 0.72rem;
-  letter-spacing: var(--track-label);
-  text-transform: uppercase;
-  text-indent: var(--track-label);
-}
-
-/* ============================================================
-   THE ONE ANIMATION — moon rotates 180° with scroll
-   (darkness turning into light)
-   ============================================================ */
-
-@keyframes moon-turn {
-  from { transform: rotate(var(--moon-base)); }
-  to   { transform: rotate(calc(var(--moon-base) + 180deg)); }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: scroll()) {
-    .moon {
-      animation: moon-turn linear both;
-      animation-timeline: scroll(root);
-      /* completes as the Listen section arrives */
-      animation-range: 0% 80%;
-    }
-  }
-}
-
-/* ============================================================
-   MOBILE (portrait) — the split rotates to horizontal:
-   dark top, light bottom
-   ============================================================ */
-
-@media (max-width: 767px) {
-  :root { --moon-base: 90deg; } /* light half rotates to the top (dark side) */
-
-  .hero {
-    background: linear-gradient(180deg, var(--ink) 0 50%, var(--paper) 50% 100%);
-  }
-
-  .hero h1 { font-size: clamp(1.15rem, 5.4vw, 1.6rem); }
-
-  .title-half {
-    width: 100%;
-    left: 0; right: 0;
-    padding: 0 8vw;
-    transform: none;
-  }
-  .title-dark  { top: 21%; }
-  .title-light { top: auto; bottom: 27%; }
-
-  .artist {
-    bottom: 8vh;
-    justify-content: center;
-    gap: 0.42em; /* matches letterspacing: reads as one name */
-  }
-  .artist span { width: auto; }
-  .artist .soren { color: var(--ink); } /* bottom half is light on mobile */
-}
-</style>
+  <meta charset="utf-8">
+  <title>Dreams of Darkness, Dreams of Light — Soren En</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #141412; display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
+    #__bundler_loading { position: fixed; bottom: 20px; right: 20px; font: 13px/1.4 -apple-system, BlinkMacSystemFont, sans-serif; color: #666; background: #fff; padding: 8px 14px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.12); z-index: 10000; }
+    #__bundler_thumbnail { position: fixed; inset: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #141412; z-index: 9999; }
+    #__bundler_thumbnail svg { width: 100%; height: 100%; object-fit: contain; }
+    #__bundler_placeholder { color: #999; font-size: 14px; }
+  </style>
+  <noscript>
+    <style>#__bundler_loading { display: none; }</style>
+    <div style="position:fixed;bottom:12px;left:12px;font:13px/1.4 -apple-system,BlinkMacSystemFont,sans-serif;color:#999;background:rgba(255,255,255,0.9);padding:6px 12px;border-radius:6px;box-shadow:0 1px 4px rgba(0,0,0,0.08);z-index:10000;">
+      This page requires JavaScript to display.
+    </div>
+  </noscript>
 </head>
-
-<template id="__bundler_thumbnail" data-bg-color="#141412">
-  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-    <rect x="0" y="0" width="50" height="100" fill="#141412"/>
-    <rect x="50" y="0" width="50" height="100" fill="#f2f2f0"/>
-    <circle cx="50" cy="50" r="14" fill="#f2f2f0"/>
-    <path d="M50 36 a14 14 0 0 1 0 28 Z" fill="#141412"/>
-  </svg>
-</template>
-
 <body>
-<a class="skip-link" href="#main">Skip to content</a>
+  <div id="__bundler_thumbnail">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="0" width="50" height="100" fill="#141412"></rect>
+    <rect x="50" y="0" width="50" height="100" fill="#f2f2f0"></rect>
+    <circle cx="50" cy="50" r="14" fill="#f2f2f0"></circle>
+    <path d="M50 36 a14 14 0 0 1 0 28 Z" fill="#141412"></path>
+  </svg>
+</div>
+  <div id="__bundler_loading">Unpacking...</div>
 
-<!-- ============ 1. HERO ============ -->
-<header class="hero">
-  <h1>
-    <span class="title-half title-dark">Dreams<br>of<br>Darkness</span>
-    <span class="title-half title-light">Dreams<br>of<br>Light</span>
-  </h1>
+  <script>
+    
+document.addEventListener('DOMContentLoaded', async function() {
+  const loading = document.getElementById('__bundler_loading');
+  function setStatus(msg) { if (loading) loading.textContent = msg; }
 
-  <div class="moon" id="moon" aria-hidden="true"></div>
+  // Error sink persists across replaceWith since it's on window, not the DOM.
+  window.addEventListener('error', function(e) {
+    var p = document.body || document.documentElement;
+    var d = document.getElementById('__bundler_err') || p.appendChild(document.createElement('div'));
+    d.id = '__bundler_err';
+    d.style.cssText = 'position:fixed;bottom:12px;left:12px;right:12px;font:12px/1.4 ui-monospace,monospace;background:#2a1215;color:#ff8a80;padding:10px 14px;border-radius:8px;border:1px solid #5c2b2e;z-index:99999;white-space:pre-wrap;max-height:40vh;overflow:auto';
+    d.textContent = (d.textContent ? d.textContent + String.fromCharCode(10) : '') +
+      '[bundle] ' + (e.message || e.type) +
+      (e.filename ? ' (' + e.filename.slice(0, 60) + ':' + e.lineno + ')' : '');
+  }, true);
 
-  <p class="artist">
-    <span class="soren">Soren</span><span class="en">En</span>
-  </p>
+  try {
+    const manifestEl = document.querySelector('script[type="__bundler/manifest"]');
+    const templateEl = document.querySelector('script[type="__bundler/template"]');
+    if (!manifestEl || !templateEl) {
+      setStatus('Error: missing bundle data');
+      console.error('[bundler] Missing script tags — manifestEl:', !!manifestEl, 'templateEl:', !!templateEl);
+      return;
+    }
 
-  <div class="scroll-cue" aria-hidden="true"></div>
-</header>
+    const manifest = JSON.parse(manifestEl.textContent);
+    let template = JSON.parse(templateEl.textContent);
 
-<main id="main">
+    const uuids = Object.keys(manifest);
+    setStatus('Unpacking ' + uuids.length + ' assets...');
 
-  <!-- ============ 2. ABOUT ============ -->
-  <section class="about" aria-labelledby="about-heading">
-    <div>
-      <!-- TITLE: replace -->
-      <h2 id="about-heading" class="section-title">The Album</h2>
-      <!-- BLURB: replace -->
-      <p>
-        Dreams of Darkness, Dreams of Light is a record written between two
-        hours of the night&nbsp;&mdash; the one where everything ends and the one
-        where everything begins. Placeholder text: replace this blurb with the
-        final album description before launch.
-      </p>
-      <div class="scroll-cue-about" aria-hidden="true"></div>
-    </div>
-  </section>
+    const blobUrls = {};
+    await Promise.all(uuids.map(async (uuid) => {
+      const entry = manifest[uuid];
+      try {
+        const binaryStr = atob(entry.data);
+        const bytes = new Uint8Array(binaryStr.length);
+        for (let i = 0; i < binaryStr.length; i++) bytes[i] = binaryStr.charCodeAt(i);
 
-  <!-- ============ 3. LISTEN & FOLLOW ============ -->
-  <section class="listen" aria-labelledby="listen-heading">
-    <h2 id="listen-heading" class="sr-only">Listen and follow</h2>
+        let finalBytes = bytes;
+        if (entry.compressed) {
+          if (typeof DecompressionStream !== 'undefined') {
+            const ds = new DecompressionStream('gzip');
+            const writer = ds.writable.getWriter();
+            const reader = ds.readable.getReader();
+            writer.write(bytes);
+            writer.close();
+            const chunks = [];
+            let totalLen = 0;
+            while (true) {
+              const { done, value } = await reader.read();
+              if (done) break;
+              chunks.push(value);
+              totalLen += value.length;
+            }
+            finalBytes = new Uint8Array(totalLen);
+            let offset = 0;
+            for (const chunk of chunks) { finalBytes.set(chunk, offset); offset += chunk.length; }
+          } else {
+            console.warn('DecompressionStream not available, asset ' + uuid + ' may not render');
+          }
+        }
 
-    <!-- Primary CTA -->
-    <a class="cta" href="https://www.sorenen.com/subscribe" target="_blank" rel="noopener"
-       aria-label="Subscribe to get the release first, opens in new tab">Get the Release First</a>
+        blobUrls[uuid] = URL.createObjectURL(new Blob([finalBytes], { type: entry.mime }));
+      } catch (err) {
+        console.error('Failed to decode asset ' + uuid + ':', err);
+        blobUrls[uuid] = URL.createObjectURL(new Blob([], { type: entry.mime }));
+      }
+    }));
 
-    <!-- Secondary links -->
-    <nav class="links" aria-label="Streaming platforms">
-      <a href="https://www.sorenen.com/youtube" target="_blank" rel="noopener"
-         aria-label="Watch Soren En on YouTube, opens in new tab">YouTube</a>
-      <a href="https://www.sorenen.com/spotify" target="_blank" rel="noopener"
-         aria-label="Listen to Soren En on Spotify, opens in new tab">Spotify</a>
-      <a href="https://www.sorenen.com/applemusic" target="_blank" rel="noopener"
-         aria-label="Listen to Soren En on Apple Music, opens in new tab">Apple Music</a>
-    </nav>
+    const extResEl = document.querySelector('script[type="__bundler/ext_resources"]');
+    const extResources = extResEl ? JSON.parse(extResEl.textContent) : [];
+    const resourceMap = {};
+    for (const entry of extResources) {
+      if (blobUrls[entry.uuid]) resourceMap[entry.id] = blobUrls[entry.uuid];
+    }
 
-    <!-- QR codes (shown on viewports ≥768px only) -->
-    <div class="qr-grid">
-      <!-- QR: subscribe -->
-      <figure class="qr">
-        <div class="qr-frame"><img src="assets/qr-subscribe.svg" alt="QR code linking to the Soren En subscribe page"></div>
-        <figcaption>Subscribe</figcaption>
-      </figure>
-      <!-- QR: youtube -->
-      <figure class="qr">
-        <div class="qr-frame"><img src="assets/qr-youtube.svg" alt="QR code linking to Soren En on YouTube"></div>
-        <figcaption>YouTube</figcaption>
-      </figure>
-      <!-- QR: spotify -->
-      <figure class="qr">
-        <div class="qr-frame"><img src="assets/qr-spotify.svg" alt="QR code linking to Soren En on Spotify"></div>
-        <figcaption>Spotify</figcaption>
-      </figure>
-      <!-- QR: apple music -->
-      <figure class="qr">
-        <div class="qr-frame"><img src="assets/qr-apple.svg" alt="QR code linking to Soren En on Apple Music"></div>
-        <figcaption>Apple Music</figcaption>
-      </figure>
-    </div>
-  </section>
+    setStatus('Rendering...');
+    for (const uuid of uuids) template = template.split(uuid).join(blobUrls[uuid]);
 
-</main>
+    // Strip integrity + crossorigin — blob URLs from a file:// document inherit
+    // a null origin, so crossorigin forces a CORS fetch that SRI then rejects.
+    // The manifest bytes are ours; SRI protects against CDN compromise, not this.
+    template = template.replace(/\s+integrity="[^"]*"/gi, '').replace(/\s+crossorigin="[^"]*"/gi, '');
 
-<!-- ============ 4. FOOTER ============ -->
-<footer>
-  <p>&copy; 2026 Bryan Nippers (Soren En)</p>
-</footer>
+    const resourceScript = '<script>window.__resources = ' +
+      JSON.stringify(resourceMap).split('</' + 'script>').join('<\\/' + 'script>') +
+      ';</' + 'script>';
+    // Inject after <head> so the DOCTYPE stays first; prepending the script
+    // would push the parser into quirks mode. DOMParser always emits a <head>
+    // (synthesizing one if the source HTML omitted it) but may carry
+    // attributes through, so match the full opening tag. slice() rather than
+    // replace() keeps us clear of $-pattern substitution in resourceScript.
+    const headOpen = template.match(/<head[^>]*>/i);
+    if (headOpen) {
+      const i = headOpen.index + headOpen[0].length;
+      template = template.slice(0, i) + resourceScript + template.slice(i);
+    }
 
-<script>
-/* Scroll fallback for the moon rotation — only runs where CSS
-   scroll-driven animations are unsupported, and never for
-   reduced-motion users. Rotation transform only. */
-(function () {
-  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var supported = window.CSS && CSS.supports && CSS.supports("animation-timeline: scroll()");
-  if (reduced || supported) return;
-
-  var moon = document.getElementById("moon");
-  var ticking = false;
-
-  function update() {
-    ticking = false;
-    var max = (document.documentElement.scrollHeight - window.innerHeight) * 0.8;
-    var progress = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
-    var base = window.matchMedia("(max-width: 767px)").matches ? 90 : 0;
-    moon.style.transform = "rotate(" + (base + progress * 180) + "deg)";
+    // Parse the template and swap the root element. Scripts inserted via
+    // DOMParser/replaceWith are inert per spec — re-create each with
+    // createElement so they execute, awaiting onload for src scripts to
+    // preserve ordering (React before ReactDOM before Babel before text/babel).
+    const doc = new DOMParser().parseFromString(template, 'text/html');
+    document.documentElement.replaceWith(doc.documentElement);
+    const dead = Array.from(document.scripts);
+    for (const old of dead) {
+      const s = document.createElement('script');
+      for (const a of old.attributes) s.setAttribute(a.name, a.value);
+      s.textContent = old.textContent;
+      // text/babel scripts with a src: fetch and inline. transformScriptTags
+      // does XHR against the src, but blob:null/ from a file:// origin is
+      // silently dropped. Inlining makes it a plain inline babel script,
+      // which transformScriptTags handles unconditionally.
+      if ((s.type === 'text/babel' || s.type === 'text/jsx') && s.src) {
+        const r = await fetch(s.src);
+        s.textContent = await r.text();
+        s.removeAttribute('src');
+      }
+      const p = s.src ? new Promise(function(r) { s.onload = s.onerror = r; }) : null;
+      old.replaceWith(s);
+      if (p) await p;
+    }
+    // Babel standalone auto-transforms type=text/babel on DOMContentLoaded,
+    // which fired before we swapped the document. Trigger manually if present.
+    if (window.Babel && typeof window.Babel.transformScriptTags === 'function') {
+      window.Babel.transformScriptTags();
+    }
+  } catch (err) {
+    setStatus('Error unpacking: ' + err.message);
+    console.error('Bundle unpack error:', err);
   }
+});
 
-  window.addEventListener("scroll", function () {
-    if (!ticking) { ticking = true; requestAnimationFrame(update); }
-  }, { passive: true });
-  window.addEventListener("resize", update);
-  update();
-})();
-</script>
+  </script>
+
+  <script type="__bundler/manifest">
+{"0949f0a4-0c50-416c-9fdc-e58864d79cfa":{"mime":"image/svg+xml","compressed":true,"data":"H4sIAAAAAAAAE+3dzU8bRxzG8Tt/xWorVYm0hZl9nSWYSD1xaK9cKwc2NooxyHaNyV9fPc84CWkbqb2030Ok4hRi0Kd05/e2s7sXbw/3q2I/bbZ3D+tZGU9D+fby5ORiu1+8/Gosi7vbWfnL/Hna/BbL4nC/Wm9n5XK3ezw/O3t6ejp9ak4fNouzOoRwtt0vjm85P6zu1h/+7o1xHMcz/21ZHGZleDyUxfPxz6e7291yVtb1MOjT5XS3WO6+fL6/m55+ftA3FaHQF/1SFtN6/m41/fRufvNhsXn4fX07K9fTU/Gndx3uV+fbx/nNNCsfN9N22uyn8vLkYjPd7AzJjK8QXxPK4v3dajUrN4t3r+quq44fr8vLizP9lMuLRbHbzNfb9w+b+1npf13Nd9Or2KQqNklv/MY7+jFU4XWxvZmvplfhtB8rvfzlG8piu3teTbNSkPNCkFAV+uf1m8//LUd/DOELX598Up5cnC0u/fENTKoTBzP2PQcT49CANHVbgzRNjBxNX8eqHzGaMYA0Wt8cTYyhRXGGhsTRGgdxmkQ6krXKlVgpnDGQOEM3kjjK5CBODE2H8ijwkDzK5yhPQq0uxZ46DBjOGEgcxR4QJ40DieOaB+TxsTz0GI6OZQ7HxzKHo/IdxHHeInlUMYM8XVdXTdtRODqYQRxXYSSPIjPKMzQoj1YXyaMqFeTRam9jS+Eok4I4Sl0gjjpSEMexh+TRWid51AGCPKqa29RgOFrrHI4KDRDHoQfEGQcSx2UYyeNQSPIMDcrj0AzyqAwDeULVdTUFU4eBxGnajsRpY0viqIAHcZRFQRxVzCCO0wTJ07ao/12xS6jQ049VX0eKRtuyQBylCRBHaQLEaVND4ihNgDje7gTiaL8Th6MkCuJ4/xWIM6LijltRksf700ieARUJ85YwkKeLqOUVh5p1PI8NKnVpPyFm23A99CSOazAOR606iOO0zuE4j3I4atVBnJzWQZ68sZrj0QQV5UmoyJzTKMkzooJhTH1D8oRq6DjXCYwkjeZOII7mTiTO0JM4mjuBOBr0gDiqeUAc9+okj4oMkke9McqTWMdP36GCj4sMkkdFBsnTpCrVmEuClLpAHE0PQBxND0AcZVIQR8MMEEfnKEAcDTNAHA8zSB6dEyB5NMxAeVJAebRPhORRXUjyaNhD8qjuIXl0Dgfk6ccqjZirWTXQAHFchnE4GmiAONpIA+Jo5wqI46qQw3FVCOKMqIXuIpXDyUUqyKPhHMozoCKhh4Ukj4t4kMdFM8ij4SXJ06Rq7DH3PVDZA+Jo+kTipIbE0TCMxBkDiaM6A8RRnQHiOI+SPMqjJI/yFsmj4QrKM6JCs4c9JI+GPSBPP1ZqLSgc1RkkjzI7yaMBC8njm6SCPPk+oCSQbwRKAvnOmySQTlegQEqpKJByGAkUKo1/KBqlMBDHz4cAebSPheRR747yKMWDPE6pII/6ZZInZ1QSyBmVBFKPigJpuIoCOaOCQDlID5hbLuWgyPH42RAgj5/GAPLoXC7K46TB8fhxFSBP7lNJIJ3PRYE0+EWB3KeiQIm1yHLjTAJp2EoChUqHNUXjThXk8fAX5HGnSvKoKAN5PIwGeVwkkjwja727aAV5XLSCPC4SQZ5cJJJALhJJIBeJJJCLRBRIRSIJ5NELCeQiEQTSFQ/aronxaDYF8rhMBHnyozA5nuOzJ0Gg/LBHEMgDchLIQZEEclAEgfy0UMz9kHJI5HjcqYI87gxBnuOjpTGe48OcMR53YiDPp8c5c0DH5xVzQDmFgUDufFAgdT4kkO5HhAJprzYJ5LTRtpg7EnmAB/I4bYA8ThsgjzsxkCenMRJIV4GyQIm1xHKQJoEcpEkg96okkHtVEMjdRhcxN3Rx2gB58mkEEshRiARyMU0COSySQI5CIJBr1y5hbiDg2hXkcW0G8uTajATKQQgEymseBPL+MhRItRkI5Mqj7zBXF7tBBHly5YEC6VwdCeQoRAJ50EkCuTZDgTToJIGcOEggF4sgkIvFocZc0Ou8QfKoeAV53EGDPL68BuTJxTQJ5LxKAjmvkkBOYySQswYJ5HYDBVK7QQJ58goC5bwxYi7rzXmD43E/BvIc8wYI5AYRBXIiA4F8ChEFSqxFf0xkIFBOZCTQCFtlOZFxQG7IUo+5cNWJFeRxYgV53JCBPDmPoUDKYySQLx0jgZxYUaDEWvQ5sZJAniuCQJ4rjg3mUjanMZDHYRrk8UlxkCf3YySQozQJ5KBIAvn8GAnk01EkkNMGCeS0AQKF6vMlAO1paqpCr//asrg8+fGHw/gmow6zMnZl8Zz/ePmd64f19Kb8pB5eoIcX5vyjHue7ZXE7K39NXRWuYncV9rHbD3pdxm45hGXsrlN3HbvrcJW6j4XemLqrqC8th3Cduo/6mfo5+ffwzwbj338fLw6Ol9vsvv8+fNek5vMvpD4NQ1Xo9X++rIgDar7eH/Hfgfyx3S8u/wCz9SR6EL0AAA=="},"4d480b39-21f0-468f-b688-1b4b860c69df":{"mime":"image/svg+xml","compressed":true,"data":"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"},"e041332b-7405-42a6-a902-e52a868e5f08":{"mime":"image/svg+xml","compressed":true,"data":"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"},"62f020da-2095-4d2a-b88e-c1329c2f246b":{"mime":"image/svg+xml","compressed":true,"data":"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"}}
+  </script>
+
+  <script type="__bundler/ext_resources">
+[]
+  </script>
+
+  <script type="__bundler/template">
+"<!DOCTYPE html>\n<html lang=\"en\"><head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n\n<title>Dreams of Darkness, Dreams of Light — Soren En<\u002Ftitle>\n<meta name=\"description\" content=\"Dreams of Darkness, Dreams of Light — the album by Soren En. Listen on YouTube, Spotify, and Apple Music, or subscribe to get the release first.\">\n\n<!-- OG: cover image (path relative to https://www.sorenen.com/) -->\n<meta property=\"og:type\" content=\"music.album\">\n<meta property=\"og:title\" content=\"Dreams of Darkness, Dreams of Light — Soren En\">\n<meta property=\"og:description\" content=\"The album by Soren En. Listen on YouTube, Spotify, and Apple Music, or subscribe to get the release first.\">\n<meta property=\"og:url\" content=\"https://www.sorenen.com/\">\n<meta property=\"og:image\" content=\"https://www.sorenen.com/assets/cover.jpg\">\n<meta name=\"twitter:card\" content=\"summary_large_image\">\n<meta name=\"twitter:title\" content=\"Dreams of Darkness, Dreams of Light — Soren En\">\n<meta name=\"twitter:description\" content=\"The album by Soren En. Listen on YouTube, Spotify, and Apple Music, or subscribe to get the release first.\">\n<meta name=\"twitter:image\" content=\"https://www.sorenen.com/assets/cover.jpg\">\n\n<!-- Favicon: half-moon circle, light half left / dark half right -->\n<link rel=\"icon\" href=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23f2f2f0'/%3E%3Cpath d='M50 2 a48 48 0 0 1 0 96 Z' fill='%23141412'/%3E%3C/svg%3E\">\n\n<style>\n/* ============================================================\n   DREAMS OF DARKNESS, DREAMS OF LIGHT — SOREN EN\n   Monochrome one-pager. Two inks only:\n     --ink   near-black  #141412\n     --paper warm off-white #ECE9E1\n   Serif stack chosen to match the cover's classic serif caps.\n   ============================================================ */\n\n:root {\n  --ink:   #141412;\n  --paper: #f2f2f0;\n  --serif: Baskerville, \"Baskerville Old Face\", \"Palatino Linotype\",\n           Palatino, \"Times New Roman\", Times, serif;\n  --track-title: 0.32em;   /* letterspacing for large title caps */\n  --track-label: 0.42em;   /* letterspacing for small labels (SOREN EN style) */\n  --moon-base: 0deg;       /* cover orientation: light half left, dark half right */\n}\n\n* { margin: 0; padding: 0; box-sizing: border-box; }\n\nhtml { scroll-behavior: smooth; }\n@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }\n\nbody {\n  font-family: var(--serif);\n  background: var(--paper);\n  color: var(--ink);\n  -webkit-font-smoothing: antialiased;\n  overflow-x: hidden;\n}\n\n/* ---------- Accessibility helpers ---------- */\n\n.sr-only {\n  position: absolute; width: 1px; height: 1px;\n  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;\n}\n\n.skip-link {\n  position: absolute; left: 50%; top: 0; transform: translate(-50%, -110%);\n  z-index: 100;\n  background: var(--paper); color: var(--ink);\n  border: 1px solid var(--ink);\n  padding: 0.6em 1.4em;\n  font-size: 0.8rem; letter-spacing: var(--track-label); text-transform: uppercase;\n  text-decoration: none;\n}\n.skip-link:focus-visible { transform: translate(-50%, 0); }\n\na:focus-visible,\nbutton:focus-visible {\n  outline: 2px solid currentColor;\n  outline-offset: 4px;\n}\n\n/* ============================================================\n   1. HERO — the cover, unfolded\n   ============================================================ */\n\n.hero {\n  position: relative;\n  height: 100vh;\n  height: 100svh;\n  /* hard vertical split: black left, paper right */\n  background: linear-gradient(90deg, var(--ink) 0 50%, var(--paper) 50% 100%);\n}\n\n.hero h1 {\n  font-weight: 400;\n  font-size: clamp(1.35rem, 3.2vw, 2.7rem);\n  line-height: 1.55;\n  letter-spacing: var(--track-title);\n  text-transform: uppercase;\n  text-align: center;\n}\n\n.title-half {\n  position: absolute;\n  top: 50%;\n  width: 50%;\n  transform: translateY(-50%);\n  display: block;\n  padding: 0 4vw;\n}\n.title-dark  { left: 0;  color: var(--paper); }\n.title-light { right: 0; color: var(--ink);   }\n\n/* Half-moon circle, centered on the seam.\n   Light half sits on the dark side; dark half on the light side. */\n.moon {\n  position: absolute;\n  left: 50%; top: 50%;\n  width: clamp(88px, 10vw, 144px);\n  aspect-ratio: 1;\n  margin: calc(clamp(88px, 10vw, 144px) / -2);\n  border-radius: 50%;\n  background: linear-gradient(90deg, var(--paper) 0 50%, var(--ink) 50% 100%);\n  transform: rotate(var(--moon-base));\n  will-change: transform;\n}\n\n/* Artist name, split across the seam like the cover */\n.artist {\n  position: absolute;\n  bottom: 9vh;\n  width: 100%;\n  display: flex;\n  font-size: clamp(1.05rem, 1.9vw, 1.6rem);\n  letter-spacing: var(--track-label);\n  text-transform: uppercase;\n}\n.artist span { width: 50%; text-align: center; position: relative; }\n.artist .soren { color: var(--paper); }\n.artist .en    { color: var(--ink);   }\n\n/* Horizontal line under SOREN, balancing the black half against\n   the section below (yin/yang counterweight) */\n.artist .soren::after {\n  content: \"\";\n  position: absolute;\n  left: 50%; right: 0; bottom: -1.6em;\n  transform: translateX(-50%);\n  width: 60%;\n  border-bottom: 1px solid currentColor;\n}\n\n/* Minimal scroll cue: small downward chevron on the seam.\n   mix-blend-mode keeps it monochrome-visible on both halves. */\n.scroll-cue {\n  position: absolute;\n  left: 50%; bottom: 3vh;\n  width: 16px; height: 16px;\n  transform: translateX(-50%) rotate(45deg);\n  border-right: 2px solid #fff;\n  border-bottom: 2px solid #fff;\n  mix-blend-mode: difference;\n}\n\n/* ============================================================\n   2. ABOUT — the darkness chapter\n   ============================================================ */\n\n.about {\n  background: var(--ink);\n  color: var(--paper);\n  min-height: 90vh;\n  display: grid;\n  place-items: center;\n  padding: 20vh 6vw;\n}\n\n.about h2.section-title {\n  font-weight: 700;\n  font-size: clamp(1.6rem, 3vw, 2.4rem);\n  letter-spacing: var(--track-title);\n  text-transform: uppercase;\n  margin-bottom: 2rem;\n  text-align: center;\n}\n\n.about p {\n  max-width: 58ch;\n  text-align: center;\n  font-size: clamp(1.05rem, 1.6vw, 1.3rem);\n  line-height: 2.1;\n  letter-spacing: 0.04em;\n}\n\n.about .scroll-cue-about {\n  margin-top: 5rem;\n  width: 16px; height: 16px;\n  transform: rotate(45deg);\n  border-right: 2px solid var(--paper);\n  border-bottom: 2px solid var(--paper);\n}\n\n/* ============================================================\n   3. LISTEN & FOLLOW — the light chapter\n   ============================================================ */\n\n.listen {\n  background: var(--paper);\n  color: var(--ink);\n  padding: 18vh 6vw 14vh;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  gap: clamp(3rem, 7vh, 5rem);\n}\n\n/* Primary CTA — must outrank everything else here */\n.cta {\n  display: inline-block;\n  background: var(--ink);\n  color: var(--paper);\n  text-decoration: none;\n  text-transform: uppercase;\n  letter-spacing: var(--track-label);\n  font-size: clamp(0.95rem, 1.6vw, 1.3rem);\n  padding: 1.5em 3.2em;\n  text-align: center;\n  border: 1px solid var(--ink);\n}\n.cta:hover { background: var(--paper); color: var(--ink); }\n\n/* Secondary links */\n.links {\n  display: flex;\n  gap: clamp(0.9rem, 2vw, 1.6rem);\n  flex-wrap: wrap;\n  justify-content: center;\n}\n.links a {\n  display: inline-block;\n  color: var(--ink);\n  text-decoration: none;\n  text-transform: uppercase;\n  letter-spacing: var(--track-label);\n  font-size: clamp(0.75rem, 1.1vw, 0.9rem);\n  padding: 1em 2.2em;\n  border: 1px solid var(--ink);\n}\n.links a:hover { background: var(--ink); color: var(--paper); }\n\n/* QR codes — desktop/tablet only; hidden on mobile (buttons are the mobile path) */\n.qr-grid {\n  display: none;\n}\n@media (min-width: 768px) {\n  .qr-grid {\n    display: grid;\n    grid-template-columns: repeat(4, minmax(0, 1fr));\n    gap: clamp(1.5rem, 3vw, 3rem);\n    width: min(58rem, 100%);\n  }\n}\n\n.qr {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  gap: 1.1rem;\n}\n.qr .qr-frame {\n  width: 100%;\n  aspect-ratio: 1 / 1;           /* fixed ratio: swapping the SVG causes zero layout shift */\n  border: 1px solid var(--ink);\n  padding: 8%;\n  background: #fff;              /* QR quiet zone; still monochrome */\n}\n.qr img { display: block; width: 100%; height: 100%; }\n.qr figcaption {\n  font-size: 0.72rem;\n  letter-spacing: var(--track-label);\n  text-transform: uppercase;\n  text-indent: var(--track-label); /* optically recenters letterspaced caps */\n}\n\n/* ============================================================\n   4. FOOTER\n   ============================================================ */\n\nfooter {\n  background: var(--paper);\n  color: var(--ink);\n  text-align: center;\n  padding: 4rem 6vw 3rem;\n  font-size: 0.72rem;\n  letter-spacing: var(--track-label);\n  text-transform: uppercase;\n  text-indent: var(--track-label);\n}\n\n/* ============================================================\n   THE ONE ANIMATION — moon rotates 180° with scroll\n   (darkness turning into light)\n   ============================================================ */\n\n@keyframes moon-turn {\n  from { transform: rotate(var(--moon-base)); }\n  to   { transform: rotate(calc(var(--moon-base) + 180deg)); }\n}\n\n@media (prefers-reduced-motion: no-preference) {\n  @supports (animation-timeline: scroll()) {\n    .moon {\n      animation: moon-turn linear both;\n      animation-timeline: scroll(root);\n      /* completes as the Listen section arrives */\n      animation-range: 0% 80%;\n    }\n  }\n}\n\n/* ============================================================\n   MOBILE (portrait) — the split rotates to horizontal:\n   dark top, light bottom\n   ============================================================ */\n\n@media (max-width: 767px) {\n  :root { --moon-base: 90deg; } /* light half rotates to the top (dark side) */\n\n  .hero {\n    background: linear-gradient(180deg, var(--ink) 0 50%, var(--paper) 50% 100%);\n  }\n\n  .hero h1 { font-size: clamp(1.15rem, 5.4vw, 1.6rem); }\n\n  .title-half {\n    width: 100%;\n    left: 0; right: 0;\n    padding: 0 8vw;\n    transform: none;\n  }\n  .title-dark  { top: 21%; }\n  .title-light { top: auto; bottom: 27%; }\n\n  .artist {\n    bottom: 8vh;\n    justify-content: center;\n    gap: 0.42em; /* matches letterspacing: reads as one name */\n  }\n  .artist span { width: auto; }\n  .artist .soren { color: var(--ink); } /* bottom half is light on mobile */\n}\n<\u002Fstyle>\n<\u002Fhead>\n\n\n\n<body>\n<a class=\"skip-link\" href=\"#main\">Skip to content<\u002Fa>\n\n<!-- ============ 1. HERO ============ -->\n<header class=\"hero\">\n  <h1>\n    <span class=\"title-half title-dark\">Dreams<br>of<br>Darkness<\u002Fspan>\n    <span class=\"title-half title-light\">Dreams<br>of<br>Light<\u002Fspan>\n  <\u002Fh1>\n\n  <div class=\"moon\" id=\"moon\" aria-hidden=\"true\"><\u002Fdiv>\n\n  <p class=\"artist\">\n    <span class=\"soren\">Soren<\u002Fspan><span class=\"en\">En<\u002Fspan>\n  <\u002Fp>\n\n  <div class=\"scroll-cue\" aria-hidden=\"true\"><\u002Fdiv>\n<\u002Fheader>\n\n<main id=\"main\">\n\n  <!-- ============ 2. ABOUT ============ -->\n  <section class=\"about\" aria-labelledby=\"about-heading\">\n    <div>\n      <!-- TITLE: replace -->\n      <h2 id=\"about-heading\" class=\"section-title\">The Album<\u002Fh2>\n      <!-- BLURB: replace -->\n      <p>\n        Dreams of Darkness, Dreams of Light is a record written between two\n        hours of the night&nbsp;— the one where everything ends and the one\n        where everything begins. Placeholder text: replace this blurb with the\n        final album description before launch.\n      <\u002Fp>\n      <div class=\"scroll-cue-about\" aria-hidden=\"true\"><\u002Fdiv>\n    <\u002Fdiv>\n  <\u002Fsection>\n\n  <!-- ============ 3. LISTEN & FOLLOW ============ -->\n  <section class=\"listen\" aria-labelledby=\"listen-heading\">\n    <h2 id=\"listen-heading\" class=\"sr-only\">Listen and follow<\u002Fh2>\n\n    <!-- Primary CTA -->\n    <a class=\"cta\" href=\"https://www.sorenen.com/subscribe\" target=\"_blank\" rel=\"noopener\" aria-label=\"Subscribe to get the release first, opens in new tab\">Get the Release First<\u002Fa>\n\n    <!-- Secondary links -->\n    <nav class=\"links\" aria-label=\"Streaming platforms\">\n      <a href=\"https://www.sorenen.com/youtube\" target=\"_blank\" rel=\"noopener\" aria-label=\"Watch Soren En on YouTube, opens in new tab\">YouTube<\u002Fa>\n      <a href=\"https://www.sorenen.com/spotify\" target=\"_blank\" rel=\"noopener\" aria-label=\"Listen to Soren En on Spotify, opens in new tab\">Spotify<\u002Fa>\n      <a href=\"https://www.sorenen.com/applemusic\" target=\"_blank\" rel=\"noopener\" aria-label=\"Listen to Soren En on Apple Music, opens in new tab\">Apple Music<\u002Fa>\n    <\u002Fnav>\n\n    <!-- QR codes (shown on viewports ≥768px only) -->\n    <div class=\"qr-grid\">\n      <!-- QR: subscribe -->\n      <figure class=\"qr\">\n        <div class=\"qr-frame\"><img src=\"e041332b-7405-42a6-a902-e52a868e5f08\" alt=\"QR code linking to the Soren En subscribe page\"><\u002Fdiv>\n        <figcaption>Subscribe<\u002Ffigcaption>\n      <\u002Ffigure>\n      <!-- QR: youtube -->\n      <figure class=\"qr\">\n        <div class=\"qr-frame\"><img src=\"4d480b39-21f0-468f-b688-1b4b860c69df\" alt=\"QR code linking to Soren En on YouTube\"><\u002Fdiv>\n        <figcaption>YouTube<\u002Ffigcaption>\n      <\u002Ffigure>\n      <!-- QR: spotify -->\n      <figure class=\"qr\">\n        <div class=\"qr-frame\"><img src=\"62f020da-2095-4d2a-b88e-c1329c2f246b\" alt=\"QR code linking to Soren En on Spotify\"><\u002Fdiv>\n        <figcaption>Spotify<\u002Ffigcaption>\n      <\u002Ffigure>\n      <!-- QR: apple music -->\n      <figure class=\"qr\">\n        <div class=\"qr-frame\"><img src=\"0949f0a4-0c50-416c-9fdc-e58864d79cfa\" alt=\"QR code linking to Soren En on Apple Music\"><\u002Fdiv>\n        <figcaption>Apple Music<\u002Ffigcaption>\n      <\u002Ffigure>\n    <\u002Fdiv>\n  <\u002Fsection>\n\n<\u002Fmain>\n\n<!-- ============ 4. FOOTER ============ -->\n<footer>\n  <p>© 2026 Bryan Nippers (Soren En)<\u002Fp>\n<\u002Ffooter>\n\n<script>\n/* Scroll fallback for the moon rotation — only runs where CSS\n   scroll-driven animations are unsupported, and never for\n   reduced-motion users. Rotation transform only. */\n(function () {\n  var reduced = window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches;\n  var supported = window.CSS && CSS.supports && CSS.supports(\"animation-timeline: scroll()\");\n  if (reduced || supported) return;\n\n  var moon = document.getElementById(\"moon\");\n  var ticking = false;\n\n  function update() {\n    ticking = false;\n    var max = (document.documentElement.scrollHeight - window.innerHeight) * 0.8;\n    var progress = max > 0 ? Math.min(window.scrollY / max, 1) : 0;\n    var base = window.matchMedia(\"(max-width: 767px)\").matches ? 90 : 0;\n    moon.style.transform = \"rotate(\" + (base + progress * 180) + \"deg)\";\n  }\n\n  window.addEventListener(\"scroll\", function () {\n    if (!ticking) { ticking = true; requestAnimationFrame(update); }\n  }, { passive: true });\n  window.addEventListener(\"resize\", update);\n  update();\n})();\n<\u002Fscript>\n\n\n<\u002Fbody><\u002Fhtml>"
+  </script>
 </body>
 </html>
