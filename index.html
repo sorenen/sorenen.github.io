@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Dreams of Darkness, Dreams of Light — Soren En</title>
+<meta name="description" content="Dreams of Darkness, Dreams of Light — the album by Soren En. Listen on YouTube, Spotify, and Apple Music, or subscribe to get the release first.">
+
+<!-- OG: cover image (path relative to https://www.sorenen.com/) -->
+<meta property="og:type" content="music.album">
+<meta property="og:title" content="Dreams of Darkness, Dreams of Light — Soren En">
+<meta property="og:description" content="The album by Soren En. Listen on YouTube, Spotify, and Apple Music, or subscribe to get the release first.">
+<meta property="og:url" content="https://www.sorenen.com/">
+<meta property="og:image" content="https://www.sorenen.com/assets/cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Dreams of Darkness, Dreams of Light — Soren En">
+<meta name="twitter:description" content="The album by Soren En. Listen on YouTube, Spotify, and Apple Music, or subscribe to get the release first.">
+<meta name="twitter:image" content="https://www.sorenen.com/assets/cover.jpg">
+
+<!-- Favicon: half-moon circle, light half left / dark half right -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23f2f2f0'/%3E%3Cpath d='M50 2 a48 48 0 0 1 0 96 Z' fill='%23141412'/%3E%3C/svg%3E">
+
+<style>
+/* ============================================================
+   DREAMS OF DARKNESS, DREAMS OF LIGHT — SOREN EN
+   Monochrome one-pager. Two inks only:
+     --ink   near-black  #141412
+     --paper warm off-white #ECE9E1
+   Serif stack chosen to match the cover's classic serif caps.
+   ============================================================ */
+
+:root {
+  --ink:   #141412;
+  --paper: #f2f2f0;
+  --serif: Baskerville, "Baskerville Old Face", "Palatino Linotype",
+           Palatino, "Times New Roman", Times, serif;
+  --track-title: 0.32em;   /* letterspacing for large title caps */
+  --track-label: 0.42em;   /* letterspacing for small labels (SOREN EN style) */
+  --moon-base: 0deg;       /* cover orientation: light half left, dark half right */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  font-family: var(--serif);
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ---------- Accessibility helpers ---------- */
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute; left: 50%; top: 0; transform: translate(-50%, -110%);
+  z-index: 100;
+  background: var(--paper); color: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 0.6em 1.4em;
+  font-size: 0.8rem; letter-spacing: var(--track-label); text-transform: uppercase;
+  text-decoration: none;
+}
+.skip-link:focus-visible { transform: translate(-50%, 0); }
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+/* ============================================================
+   1. HERO — the cover, unfolded
+   ============================================================ */
+
+.hero {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  /* hard vertical split: black left, paper right */
+  background: linear-gradient(90deg, var(--ink) 0 50%, var(--paper) 50% 100%);
+}
+
+.hero h1 {
+  font-weight: 400;
+  font-size: clamp(1.35rem, 3.2vw, 2.7rem);
+  line-height: 1.55;
+  letter-spacing: var(--track-title);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.title-half {
+  position: absolute;
+  top: 50%;
+  width: 50%;
+  transform: translateY(-50%);
+  display: block;
+  padding: 0 4vw;
+}
+.title-dark  { left: 0;  color: var(--paper); }
+.title-light { right: 0; color: var(--ink);   }
+
+/* Half-moon circle, centered on the seam.
+   Light half sits on the dark side; dark half on the light side. */
+.moon {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: clamp(88px, 10vw, 144px);
+  aspect-ratio: 1;
+  margin: calc(clamp(88px, 10vw, 144px) / -2);
+  border-radius: 50%;
+  background: linear-gradient(90deg, var(--paper) 0 50%, var(--ink) 50% 100%);
+  transform: rotate(var(--moon-base));
+  will-change: transform;
+}
+
+/* Artist name, split across the seam like the cover */
+.artist {
+  position: absolute;
+  bottom: 9vh;
+  width: 100%;
+  display: flex;
+  font-size: clamp(1.05rem, 1.9vw, 1.6rem);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+}
+.artist span { width: 50%; text-align: center; }
+.artist .soren { color: var(--paper); }
+.artist .en    { color: var(--ink);   }
+
+/* Minimal scroll cue: small downward chevron on the seam.
+   mix-blend-mode keeps it monochrome-visible on both halves. */
+.scroll-cue {
+  position: absolute;
+  left: 50%; bottom: 3vh;
+  width: 16px; height: 16px;
+  transform: translateX(-50%) rotate(45deg);
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  mix-blend-mode: difference;
+}
+
+/* ============================================================
+   2. ABOUT — the darkness chapter
+   ============================================================ */
+
+.about {
+  background: var(--ink);
+  color: var(--paper);
+  min-height: 90vh;
+  display: grid;
+  place-items: center;
+  padding: 20vh 6vw;
+}
+
+.about p {
+  max-width: 58ch;
+  text-align: center;
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  line-height: 2.1;
+  letter-spacing: 0.04em;
+}
+
+/* ============================================================
+   3. LISTEN & FOLLOW — the light chapter
+   ============================================================ */
+
+.listen {
+  background: var(--paper);
+  color: var(--ink);
+  padding: 18vh 6vw 14vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(3rem, 7vh, 5rem);
+}
+
+/* Primary CTA — must outrank everything else here */
+.cta {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--paper);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: var(--track-label);
+  font-size: clamp(0.95rem, 1.6vw, 1.3rem);
+  padding: 1.5em 3.2em;
+  text-align: center;
+  border: 1px solid var(--ink);
+}
+.cta:hover { background: var(--paper); color: var(--ink); }
+
+/* Secondary links */
+.links {
+  display: flex;
+  gap: clamp(0.9rem, 2vw, 1.6rem);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.links a {
+  display: inline-block;
+  color: var(--ink);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: var(--track-label);
+  font-size: clamp(0.75rem, 1.1vw, 0.9rem);
+  padding: 1em 2.2em;
+  border: 1px solid var(--ink);
+}
+.links a:hover { background: var(--ink); color: var(--paper); }
+
+/* QR codes — desktop/tablet only; hidden on mobile (buttons are the mobile path) */
+.qr-grid {
+  display: none;
+}
+@media (min-width: 768px) {
+  .qr-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(1.5rem, 3vw, 3rem);
+    width: min(58rem, 100%);
+  }
+}
+
+.qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+}
+.qr .qr-frame {
+  width: 100%;
+  aspect-ratio: 1 / 1;           /* fixed ratio: swapping the SVG causes zero layout shift */
+  border: 1px solid var(--ink);
+  padding: 8%;
+  background: #fff;              /* QR quiet zone; still monochrome */
+}
+.qr img { display: block; width: 100%; height: 100%; }
+.qr figcaption {
+  font-size: 0.72rem;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  text-indent: var(--track-label); /* optically recenters letterspaced caps */
+}
+
+/* ============================================================
+   4. FOOTER
+   ============================================================ */
+
+footer {
+  background: var(--paper);
+  color: var(--ink);
+  text-align: center;
+  padding: 4rem 6vw 3rem;
+  font-size: 0.72rem;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  text-indent: var(--track-label);
+}
+
+/* ============================================================
+   THE ONE ANIMATION — moon rotates 180° with scroll
+   (darkness turning into light)
+   ============================================================ */
+
+@keyframes moon-turn {
+  from { transform: rotate(var(--moon-base)); }
+  to   { transform: rotate(calc(var(--moon-base) + 180deg)); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    .moon {
+      animation: moon-turn linear both;
+      animation-timeline: scroll(root);
+      /* completes as the Listen section arrives */
+      animation-range: 0% 80%;
+    }
+  }
+}
+
+/* ============================================================
+   MOBILE (portrait) — the split rotates to horizontal:
+   dark top, light bottom
+   ============================================================ */
+
+@media (max-width: 767px) {
+  :root { --moon-base: 90deg; } /* light half rotates to the top (dark side) */
+
+  .hero {
+    background: linear-gradient(180deg, var(--ink) 0 50%, var(--paper) 50% 100%);
+  }
+
+  .hero h1 { font-size: clamp(1.15rem, 5.4vw, 1.6rem); }
+
+  .title-half {
+    width: 100%;
+    left: 0; right: 0;
+    padding: 0 8vw;
+    transform: none;
+  }
+  .title-dark  { top: 21%; }
+  .title-light { top: auto; bottom: 27%; }
+
+  .artist {
+    bottom: 8vh;
+    justify-content: center;
+    gap: 0.42em; /* matches letterspacing: reads as one name */
+  }
+  .artist span { width: auto; }
+  .artist .soren { color: var(--ink); } /* bottom half is light on mobile */
+}
+</style>
+</head>
+
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ============ 1. HERO ============ -->
+<header class="hero">
+  <h1>
+    <span class="title-half title-dark">Dreams<br>of<br>Darkness</span>
+    <span class="title-half title-light">Dreams<br>of<br>Light</span>
+  </h1>
+
+  <div class="moon" id="moon" aria-hidden="true"></div>
+
+  <p class="artist">
+    <span class="soren">Soren</span><span class="en">En</span>
+  </p>
+
+  <div class="scroll-cue" aria-hidden="true"></div>
+</header>
+
+<main id="main">
+
+  <!-- ============ 2. ABOUT ============ -->
+  <section class="about" aria-labelledby="about-heading">
+    <h2 id="about-heading" class="sr-only">About the album</h2>
+    <!-- BLURB: replace -->
+    <p>
+      Dreams of Darkness, Dreams of Light is a record written between two
+      hours of the night&nbsp;&mdash; the one where everything ends and the one
+      where everything begins. Placeholder text: replace this blurb with the
+      final album description before launch.
+    </p>
+  </section>
+
+  <!-- ============ 3. LISTEN & FOLLOW ============ -->
+  <section class="listen" aria-labelledby="listen-heading">
+    <h2 id="listen-heading" class="sr-only">Listen and follow</h2>
+
+    <!-- Primary CTA -->
+    <a class="cta" href="https://www.sorenen.com/subscribe" target="_blank" rel="noopener"
+       aria-label="Subscribe to get the release first, opens in new tab">Get the Release First</a>
+
+    <!-- Secondary links -->
+    <nav class="links" aria-label="Streaming platforms">
+      <a href="https://www.sorenen.com/youtube" target="_blank" rel="noopener"
+         aria-label="Watch Soren En on YouTube, opens in new tab">YouTube</a>
+      <a href="https://www.sorenen.com/spotify" target="_blank" rel="noopener"
+         aria-label="Listen to Soren En on Spotify, opens in new tab">Spotify</a>
+      <a href="https://www.sorenen.com/applemusic" target="_blank" rel="noopener"
+         aria-label="Listen to Soren En on Apple Music, opens in new tab">Apple Music</a>
+    </nav>
+
+    <!-- QR codes (shown on viewports ≥768px only) -->
+    <div class="qr-grid">
+      <!-- QR: subscribe -->
+      <figure class="qr">
+        <div class="qr-frame"><img src="assets/qr-subscribe.svg" alt="QR code linking to the Soren En subscribe page"></div>
+        <figcaption>Subscribe</figcaption>
+      </figure>
+      <!-- QR: youtube -->
+      <figure class="qr">
+        <div class="qr-frame"><img src="assets/qr-youtube.svg" alt="QR code linking to Soren En on YouTube"></div>
+        <figcaption>YouTube</figcaption>
+      </figure>
+      <!-- QR: spotify -->
+      <figure class="qr">
+        <div class="qr-frame"><img src="assets/qr-spotify.svg" alt="QR code linking to Soren En on Spotify"></div>
+        <figcaption>Spotify</figcaption>
+      </figure>
+      <!-- QR: apple music -->
+      <figure class="qr">
+        <div class="qr-frame"><img src="assets/qr-apple.svg" alt="QR code linking to Soren En on Apple Music"></div>
+        <figcaption>Apple Music</figcaption>
+      </figure>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ 4. FOOTER ============ -->
+<footer>
+  <p>&copy; 2026 Bryan Nippers (Soren En)</p>
+</footer>
+
+<script>
+/* Scroll fallback for the moon rotation — only runs where CSS
+   scroll-driven animations are unsupported, and never for
+   reduced-motion users. Rotation transform only. */
+(function () {
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var supported = window.CSS && CSS.supports && CSS.supports("animation-timeline: scroll()");
+  if (reduced || supported) return;
+
+  var moon = document.getElementById("moon");
+  var ticking = false;
+
+  function update() {
+    ticking = false;
+    var max = (document.documentElement.scrollHeight - window.innerHeight) * 0.8;
+    var progress = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+    var base = window.matchMedia("(max-width: 767px)").matches ? 90 : 0;
+    moon.style.transform = "rotate(" + (base + progress * 180) + "deg)";
+  }
+
+  window.addEventListener("scroll", function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }, { passive: true });
+  window.addEventListener("resize", update);
+  update();
+})();
+</script>
+</body>
+</html>
