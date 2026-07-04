@@ -89,6 +89,17 @@ button:focus-visible {
   background: linear-gradient(90deg, var(--ink) 0 50%, var(--paper) 50% 100%);
 }
 
+/* Thin white border anchoring the bottom edge of the hero,
+   visible across both halves like the cover's paper edge */
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: #fff;
+  mix-blend-mode: difference;
+}
+
 .hero h1 {
   font-weight: 400;
   font-size: clamp(1.35rem, 3.2vw, 2.7rem);
@@ -133,7 +144,7 @@ button:focus-visible {
   letter-spacing: var(--track-label);
   text-transform: uppercase;
 }
-.artist span { width: 50%; text-align: center; }
+.artist span { width: 50%; text-align: center; position: relative; }
 .artist .soren { color: var(--paper); }
 .artist .en    { color: var(--ink);   }
 
@@ -154,6 +165,7 @@ button:focus-visible {
    ============================================================ */
 
 .about {
+  position: relative;
   background: var(--ink);
   color: var(--paper);
   min-height: 90vh;
@@ -162,12 +174,30 @@ button:focus-visible {
   padding: 20vh 6vw;
 }
 
+.about h2.section-title {
+  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  letter-spacing: var(--track-title);
+  text-transform: uppercase;
+  margin-bottom: 2.4rem;
+  text-align: center;
+}
+
 .about p {
   max-width: 58ch;
   text-align: center;
   font-size: clamp(1.05rem, 1.6vw, 1.3rem);
   line-height: 2.1;
   letter-spacing: 0.04em;
+}
+
+.about .scroll-cue-about {
+  position: absolute;
+  left: 50%; bottom: 3vh;
+  width: 16px; height: 16px;
+  transform: translateX(-50%) rotate(45deg);
+  border-right: 2px solid var(--paper);
+  border-bottom: 2px solid var(--paper);
 }
 
 /* ============================================================
@@ -257,10 +287,14 @@ button:focus-visible {
    ============================================================ */
 
 footer {
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  min-height: 22vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: 4rem 6vw 3rem;
+  padding: 3rem 6vw;
   font-size: 0.72rem;
   letter-spacing: var(--track-label);
   text-transform: uppercase;
@@ -322,6 +356,15 @@ footer {
 </style>
 </head>
 
+<template id="__bundler_thumbnail" data-bg-color="#141412">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="0" width="50" height="100" fill="#141412"/>
+    <rect x="50" y="0" width="50" height="100" fill="#f2f2f0"/>
+    <circle cx="50" cy="50" r="14" fill="#f2f2f0"/>
+    <path d="M50 36 a14 14 0 0 1 0 28 Z" fill="#141412"/>
+  </svg>
+</template>
+
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 
@@ -345,14 +388,18 @@ footer {
 
   <!-- ============ 2. ABOUT ============ -->
   <section class="about" aria-labelledby="about-heading">
-    <h2 id="about-heading" class="sr-only">About the album</h2>
-    <!-- BLURB: replace -->
-    <p>
-      Dreams of Darkness, Dreams of Light is a record written between two
-      hours of the night&nbsp;&mdash; the one where everything ends and the one
-      where everything begins. Placeholder text: replace this blurb with the
-      final album description before launch.
-    </p>
+    <div>
+      <!-- TITLE: replace -->
+      <h2 id="about-heading" class="section-title">The Album</h2>
+      <!-- BLURB: replace -->
+      <p>
+        Dreams of Darkness, Dreams of Light is a record written between two
+        hours of the night&nbsp;&mdash; the one where everything ends and the one
+        where everything begins. Placeholder text: replace this blurb with the
+        final album description before launch.
+      </p>
+      <div class="scroll-cue-about" aria-hidden="true"></div>
+    </div>
   </section>
 
   <!-- ============ 3. LISTEN & FOLLOW ============ -->
